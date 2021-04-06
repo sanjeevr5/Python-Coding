@@ -60,6 +60,8 @@ class LinkedList:
         Outputs : 
             Returns the head of the linked list
         """
+        leng = self.length(head)
+        assert pos >= 0 and pos <= self.length(head), f'Indices should range from 0 to {leng}'
         prev, curr = None, head
         ct = 0
         while ct < pos:
@@ -72,7 +74,31 @@ class LinkedList:
         else:
             prev.next = newNode
         newNode.next = curr
-        return head            
+        return head
+
+    def delete(self, head : Node, pos : int)  -> Node:
+        """
+        Purpose : To add elements at a specific position of the linked list
+        Input parameters :
+         1. head - Header node of the linked list
+         2. pos - The position to be deleted (starts from 0 index)
+        Outputs : 
+            Returns the head of the linked list
+        """
+        leng = self.length(head)
+        assert pos >= 0 and pos < self.length(head), f'Indices should range from 0 to {leng}'
+        prev, curr = None, head
+        ct = 0
+        while ct < pos:
+            prev = curr
+            curr = prev.next
+            ct += 1
+        if prev is None:
+            head = curr.next
+        else:
+            prev.next = curr.next
+        return head
+
 
 
 if __name__ == '__main__':
@@ -81,5 +107,7 @@ if __name__ == '__main__':
     leng = o1.length(head)
     print(f'The length of the linked list is {leng}')
     o1.print_ll(head)
-    head = o1.insert(head, 1, 0)
+    head = o1.insert(head, 4, 3)
+    o1.print_ll(head)
+    head = o1.delete(head, 3)
     o1.print_ll(head)
