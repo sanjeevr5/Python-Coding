@@ -81,3 +81,5 @@ if __name__ == '__main__':
     leng = o1.length(head)
     print(f'The length of the linked list is {leng}')
     o1.print_ll(head)
+    head = o1.insert(head, 1, 0)
+    o1.print_ll(head)
