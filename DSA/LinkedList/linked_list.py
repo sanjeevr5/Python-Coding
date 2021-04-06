@@ -73,7 +73,7 @@ class LinkedList:
             head = newNode
         else:
             prev.next = newNode
-        newNode.next = curr
+        newNode.next = curr # in case of prev is None newNode.next is actually equal to head.next (shallow copy)
         return head
 
     def delete(self, head : Node, pos : int)  -> Node:
@@ -99,6 +99,23 @@ class LinkedList:
             prev.next = curr.next
         return head
 
+    def reverse(self, head):
+        """
+         Purpose : To reverse the elements of the linked list
+         Input parameters :
+         1. head - Header node of the linked list
+         Outputs : 
+            Returns the head of the linked list
+        """
+        if head.next is None:
+            return head
+        newHead = self.reverse(head.next)
+        tail = head.next
+        tail.next = head
+        head.next = None
+        return newHead
+
+
 
 
 if __name__ == '__main__':
@@ -111,3 +128,5 @@ if __name__ == '__main__':
     o1.print_ll(head)
     head = o1.delete(head, 3)
     o1.print_ll(head)
+    rev_ll = o1.reverse(head)
+    o1.print_ll(rev_ll)
