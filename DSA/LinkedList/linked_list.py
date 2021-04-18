@@ -114,8 +114,20 @@ class LinkedList:
         tail.next = head
         head.next = None
         return newHead
-
-
+    
+    def mid_point(self, head : Node) -> Node:
+        """
+         Purpose : To get the midpoint of the linked list
+         Input parameters :
+         1. head - Header node of the linked list
+         Outputs : 
+            Returns the mid point node
+        """
+        slow, fast = head.next, head.next.next
+        while slow.next is not None and fast.next.next is not None:
+            slow = fast
+            fast = fast.next
+        return slow
 
 
 if __name__ == '__main__':
@@ -126,6 +138,7 @@ if __name__ == '__main__':
     o1.print_ll(head)
     head = o1.insert(head, 4, 3)
     o1.print_ll(head)
+    print(f'The mid point is {o1.mid_point(head).data}')
     head = o1.delete(head, 3)
     o1.print_ll(head)
     rev_ll = o1.reverse(head)
